@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block inside %}
+  <section>
+    <div class="Table of Contents" > 
+      <h1>Table of Contents</h1>
+      <ol>
+        {% for lesson in my_notes %}
+          <li><a href="#{{lesson[0]}}">{{lesson[0]}}</a>
+            <ul>
+              {% for note in lesson[1] %}
+                <li><a href="#{{note[0]}}">{{note[0]}}</a></li>
+              {% endfor %}
+            </ul>
+          </li>
+        {% endfor %}        
+      </ol>
+    </div>
+  </section>
+  <h1>Important Concepts</h1>
+  <section>
+    {% for lesson in my_notes %}
+      <div class="mainlessons">
+        <h2 id="{{lesson[0]}}"> {{lesson[0]}} </h2>
+        {% for note in lesson[1] %}
+          <div class="concept" id="{{note[0]}}">
+            <div class="concept-title">
+              {{ note[0] }}
+            </div>
+            <div class="concept-description">
+              {{ note[1] | safe}}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </section>
+  <hr>
+  Please enter your comments regarding my notes in the following fields:
+  <section>
+    <form style="margin-top: 1em" action="/sign?" method="post">
+      Guestbook name: <input name="guestbook_name"><br>
+      Comments: 
+      <div><textarea name="content" rows="5" cols="60"></textarea></div><br>
+      <div><input type="submit" value="Sign Guestbook"></div>
+    </form>
+  </section>  
+  <hr><br>
+  <section>
+    {% for greeting in List_of_greetings %}
+      {% if greeting[1] %}
+        {% if greeting[0] %}
+          <b>{{greeting[0]}}</b> wrote:
+        {% else %}
+          An anonymous person wrote:
+        {% endif %}
+        <blockquote style="margin-top: 0em">{{greeting[1]}}</blockquote>
+      {% endif %}
+    {% endfor %}
+  </section>
+{% endblock %}

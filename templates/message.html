@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block inside %}
+  <section>
+      <div class="mainlessons">
+        <h2> Message </h2>
+          <div class="concept">
+            <div class="concept-title">
+              {{output_message}}
+              <br>
+              <form action="/?">
+                <div><input type="submit" value="OK"></div>
+              </form>
+            </div>
+          </div>
+      </div>
+  </section>
+{% endblock %}  
